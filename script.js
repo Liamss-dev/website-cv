@@ -167,7 +167,18 @@ buttons.forEach((button) => {
       } else {
         item.style.display = 'none';
       }
+      const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+      portfolioItems.forEach(item => {
+        item.addEventListener('click', function() {
+          
+          portfolioItems.forEach(el => {
+            if (el !== this) el.classList.remove('show-overlay');
+          });
+      
+          this.classList.toggle('show-overlay');
+        });
+      });
     });
   });
 });
-
