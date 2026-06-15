@@ -602,12 +602,15 @@ ul {
   justify-content: center;
   align-items: center;
 
+  .portfolio-overlay {
   opacity: 0;
-  transition: .3s;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
 }
-
-.portfolio-item:hover .portfolio-overlay {
+.portfolio-item:hover .portfolio-overlay,
+.portfolio-item.show-overlay .portfolio-overlay {
   opacity: 1;
+  pointer-events: auto;
 }
 
 /* ================================= */
