@@ -74,35 +74,40 @@ skillCards.forEach((card) => {
   cardObserver.observe(card);
 });
 
-/* MOBILE MENU */
+/* Portfolio */
 
-const menuToggle = document.querySelector('.menu-toggle');
-const navbar = document.querySelector('.navbar');
+const buttons = document.querySelectorAll('.portfolio-filter button');
+const items = document.querySelectorAll('.portfolio-item');
 
-if (menuToggle && navbar) {
-  menuToggle.addEventListener('click', () => {
-    navbar.classList.toggle('open');
 
-    const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
-    menuToggle.setAttribute('aria-expanded', String(!expanded));
-  });
+buttons.forEach((button) => {
+  button.addEventListener('click', () => {
 
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 768) {
-      navbar.classList.remove('open');
-      menuToggle.setAttribute('aria-expanded', 'false');
-    }
-  });
+    buttons.forEach((btn) => btn.classList.remove('active'));
+    button.classList.add('active');
 
-  document.querySelectorAll('.navbar a').forEach((link) => {
-    link.addEventListener('click', () => {
-      if (window.innerWidth <= 768) {
-        navbar.classList.remove('open');
-        menuToggle.setAttribute('aria-expanded', 'false');
+    const filter = button.dataset.filter;
+
+    items.forEach((item) => {
+      if (filter === 'all' || item.dataset.category === filter) {
+        item.style.display = 'block';
+      } else {
+        item.style.display = 'none';
       }
     });
   });
-}
+});
+
+items.forEach((item) => {
+  item.addEventListener('click', function() {
+    // Tutup overlay lain yang sedang terbuka
+    items.forEach((el) => {
+      if (el !== this) el.classList.remove('show-overlay');
+    });
+
+    this.classList.toggle('show-overlay');
+  });
+});
 
 /* BACK TO TOP */
 
@@ -148,37 +153,32 @@ sections.forEach((section) => {
   observer.observe(section);
 });
 
-/* Portfolio */
+/* MOBILE MENU */
 
-const buttons = document.querySelectorAll('.portfolio-filter button');
-const items = document.querySelectorAll('.portfolio-item');
+const menuToggle = document.querySelector('.menu-toggle');
+const navbar = document.querySelector('.navbar');
 
-buttons.forEach((button) => {
-  button.addEventListener('click', () => {
-    buttons.forEach((btn) => btn.classList.remove('active'));
+if (menuToggle && navbar) {
+  menuToggle.addEventListener('click', () => {
+    navbar.classList.toggle('open');
 
-    button.classList.add('active');
+    const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+    menuToggle.setAttribute('aria-expanded', String(!expanded));
+  });
 
-    const filter = button.dataset.filter;
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+      navbar.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
 
-    items.forEach((item) => {
-      if (filter === 'all' || item.dataset.category === filter) {
-        item.style.display = 'block';
-      } else {
-        item.style.display = 'none';
+  document.querySelectorAll('.navbar a').forEach((link) => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 768) {
+        navbar.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
       }
-      const portfolioItems = document.querySelectorAll('.portfolio-item');
-
-      portfolioItems.forEach(item => {
-        item.addEventListener('click', function() {
-          
-          portfolioItems.forEach(el => {
-            if (el !== this) el.classList.remove('show-overlay');
-          });
-      
-          this.classList.toggle('show-overlay');
-        });
-      });
     });
   });
-});
+}
