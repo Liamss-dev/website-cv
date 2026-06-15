@@ -82,9 +82,9 @@ const items = document.querySelectorAll('.portfolio-item');
 function jalankanFilter(kategori) {
   items.forEach((item) => {
     if (kategori === 'all' || item.dataset.category === kategori) {
-      item.style.display = 'block'; // Ini yang memicu 'redraw' layout di HP
+      item.style.display = '';
     } else {
-      item.style.display = 'none';
+      item.style.display = 'none'; 
     }
   });
 }
@@ -99,13 +99,8 @@ buttons.forEach((button) => {
   });
 });
 
-const tombolAktifAwal = document.querySelector('.portfolio-filter button.active');
-if (tombolAktifAwal) {
-  jalankanFilter(tombolAktifAwal.dataset.filter);
-}
-
 items.forEach((item) => {
-  item.addEventListener('click', function(e) {
+  item.addEventListener('click', function() {
     items.forEach((el) => {
       if (el !== this) el.classList.remove('show-overlay');
     });
