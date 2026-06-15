@@ -79,32 +79,36 @@ skillCards.forEach((card) => {
 const buttons = document.querySelectorAll('.portfolio-filter button');
 const items = document.querySelectorAll('.portfolio-item');
 
+function jalankanFilter(kategori) {
+  items.forEach((item) => {
+    if (kategori === 'all' || item.dataset.category === kategori) {
+      item.style.display = 'block'; // Ini yang memicu 'redraw' layout di HP
+    } else {
+      item.style.display = 'none';
+    }
+  });
+}
 
 buttons.forEach((button) => {
   button.addEventListener('click', () => {
-
     buttons.forEach((btn) => btn.classList.remove('active'));
     button.classList.add('active');
 
     const filter = button.dataset.filter;
-
-    items.forEach((item) => {
-      if (filter === 'all' || item.dataset.category === filter) {
-        item.style.display = 'block';
-      } else {
-        item.style.display = 'none';
-      }
-    });
+    jalankanFilter(filter);
   });
 });
 
+const tombolAktifAwal = document.querySelector('.portfolio-filter button.active');
+if (tombolAktifAwal) {
+  jalankanFilter(tombolAktifAwal.dataset.filter);
+}
+
 items.forEach((item) => {
-  item.addEventListener('click', function() {
-    // Tutup overlay lain yang sedang terbuka
+  item.addEventListener('click', function(e) {
     items.forEach((el) => {
       if (el !== this) el.classList.remove('show-overlay');
     });
-
     this.classList.toggle('show-overlay');
   });
 });
