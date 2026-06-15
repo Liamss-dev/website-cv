@@ -941,4 +941,12 @@ ul {
     bottom: 16px;
   }
 }
+.portfolio-overlay {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.portfolio-item:hover .portfolio-overlay,
+.portfolio-item.show-overlay .portfolio-overlay {
+  opacity: 1;
+}
 
