@@ -604,13 +604,10 @@ ul {
 
   .portfolio-overlay {
   opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
+  transition: 3s;
 }
-.portfolio-item:hover .portfolio-overlay,
-.portfolio-item.show-overlay .portfolio-overlay {
+.portfolio-item:hover .portfolio-overlay{
   opacity: 1;
-  pointer-events: auto;
 }
 
 /* ================================= */
