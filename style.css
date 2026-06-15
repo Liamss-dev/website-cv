@@ -82,7 +82,7 @@ ul {
   top: 0;
   left: 0;
   width: 100%;
-  height: 90px;
+  min-height: 90px;
   padding: 0 6%;
 
   display: flex;
@@ -94,14 +94,29 @@ ul {
 
   border-bottom: 1px solid #151515;
   z-index: 999;
-
-  position: fixed;
 }
 
 .nav-left,
 .nav-right {
   display: flex;
   gap: 30px;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: white;
+  margin: 4px 0;
+  transition: .3s;
 }
 
 .navbar a {
@@ -134,19 +149,19 @@ ul {
   letter-spacing: 3px;
 }
 
-.nav-center a{
-    text-decoration:none;
-    color:white;
-    display:block;
+.nav-center a {
+  text-decoration: none;
+  color: white;
+  display: block;
 }
 
-.nav-center a:hover{
-    opacity:.8;
+.nav-center a:hover {
+  opacity: .8;
 }
 
-.nav-center a:hover h1{
-    letter-spacing:10px;
-    transition:.3s;
+.nav-center a:hover h1 {
+  letter-spacing: 10px;
+  transition: .3s;
 }
 
 /* ================================= */
@@ -736,61 +751,194 @@ ul {
 /* RESPONSIVE */
 /* ================================= */
 
-@media (max-width: 1024px) {
-  .about-grid,
-  .skills-grid,
-  .creator-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .contact-grid {
-    grid-template-columns: 1fr;
-  }
-
+@media (max-width: 1200px) {
   .home-grid {
     grid-template-columns: 1fr;
   }
 
-  .hero-left h1 {
-    font-size: 4rem;
+  .about-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .about-card:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .skills-grid,
+  .projects-grid,
+  .portfolio-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero-title {
+    font-size: clamp(3rem, 5vw, 4.5rem);
   }
 }
 
-@media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    height: auto;
-    padding: 20px;
-  }
-
-  .nav-left,
-  .nav-right {
-    margin: 10px 0;
-  }
-
+@media (max-width: 900px) {
   .section {
-    padding: 120px 5%;
+    padding: 110px 5%;
+  }
+
+  .section-title {
+    gap: 15px;
+    margin-bottom: 50px;
   }
 
   .section-title span {
-    font-size: 4rem;
+    font-size: clamp(2.8rem, 9vw, 4.2rem);
   }
 
-  .hero-left h1 {
-    font-size: 3rem;
+  .section-title h2 {
+    font-size: 1.3rem;
+  }
+
+  .about-grid,
+  .skills-grid,
+  .projects-grid,
+  .portfolio-grid,
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-card:last-child {
+    grid-column: auto;
+  }
+
+  .skill-card.design {
+    grid-column: auto;
+  }
+
+  .hero-buttons {
+    flex-wrap: wrap;
+  }
+
+  .overview-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .contact-info,
+  .contact-form,
+  .about-card,
+  .skill-card,
+  .project-card {
+    padding: 25px;
   }
 
   .timeline-item {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
   }
 
-  .table-header,
-  .table-row {
-    min-width: 800px;
+  .navbar {
+    flex-wrap: wrap;
+    padding: 18px 24px;
+    min-height: auto;
   }
 
-  .projects-table {
-    overflow-x: auto;
+  .nav-center {
+    position: static;
+    transform: none;
+    margin: 0 auto;
+  }
+
+  .nav-left,
+  .nav-right {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 12px;
+  }
+
+  .navbar.open .nav-left,
+  .navbar.open .nav-right {
+    display: flex;
+  }
+
+  .navbar.open {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .navbar.open .nav-center {
+    margin-bottom: 4px;
+  }
+
+  .navbar.open .nav-left,
+  .navbar.open .nav-right {
+    align-items: center;
+    text-align: center;
+  }
+
+  .home {
+    padding: 120px 5% 40px;
+  }
+
+  .hero-title {
+    font-size: clamp(2.5rem, 8vw, 3.4rem);
+  }
+
+  .portfolio-filter {
+    flex-wrap: wrap;
+    gap: 12px 16px;
+  }
+
+  .footer-links {
+    flex-wrap: wrap;
+    gap: 12px 20px;
+  }
+
+  .footer h2 {
+    font-size: 1.6rem;
+    letter-spacing: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    text-align: center;
+  }
+
+  .profile-card img {
+    width: min(180px, 100%);
+    height: auto;
+  }
+
+  .project-card img,
+  .portfolio-item img {
+    height: 220px;
+  }
+
+  .overview-card {
+    padding: 25px;
+  }
+
+  .section-title {
+    flex-wrap: wrap;
+  }
+
+  #topBtn {
+    width: 48px;
+    height: 48px;
+    right: 16px;
+    bottom: 16px;
   }
 }
 

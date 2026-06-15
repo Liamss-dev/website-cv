@@ -74,6 +74,36 @@ skillCards.forEach((card) => {
   cardObserver.observe(card);
 });
 
+/* MOBILE MENU */
+
+const menuToggle = document.querySelector('.menu-toggle');
+const navbar = document.querySelector('.navbar');
+
+if (menuToggle && navbar) {
+  menuToggle.addEventListener('click', () => {
+    navbar.classList.toggle('open');
+
+    const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+    menuToggle.setAttribute('aria-expanded', String(!expanded));
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+      navbar.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  document.querySelectorAll('.navbar a').forEach((link) => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 768) {
+        navbar.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+}
+
 /* BACK TO TOP */
 
 const topBtn = document.getElementById('topBtn');
