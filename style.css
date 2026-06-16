@@ -1,5 +1,5 @@
 /* ================================= */
-/* RESET */
+/* BODY */
 /* ================================= */
 
 * {
@@ -418,8 +418,6 @@ ul {
   width: 0;
   transition: width 1.8s ease;
 }
-
-/* SKILL VALUES */
 
 .html.animate { width: 82%; }
 .css.animate { width: 34%; }
